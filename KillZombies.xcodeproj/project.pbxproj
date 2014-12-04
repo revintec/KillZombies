@@ -1,0 +1,393 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		116125331A2ED15C00980EE4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 116125321A2ED15C00980EE4 /* AppDelegate.m */; };
+		116125351A2ED15C00980EE4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 116125341A2ED15C00980EE4 /* main.m */; };
+		116125371A2ED15C00980EE4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 116125361A2ED15C00980EE4 /* Images.xcassets */; };
+		1161253A1A2ED15C00980EE4 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 116125381A2ED15C00980EE4 /* MainMenu.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		116125401A2ED15C00980EE4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 116125241A2ED15C00980EE4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1161252B1A2ED15C00980EE4;
+			remoteInfo = KillZombies;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1161252C1A2ED15C00980EE4 /* KillZombies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KillZombies.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		116125301A2ED15C00980EE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		116125311A2ED15C00980EE4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		116125321A2ED15C00980EE4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		116125341A2ED15C00980EE4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		116125361A2ED15C00980EE4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		116125391A2ED15C00980EE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		1161253F1A2ED15C00980EE4 /* KillZombiesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KillZombiesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		116125291A2ED15C00980EE4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1161253C1A2ED15C00980EE4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		116125231A2ED15C00980EE4 = {
+			isa = PBXGroup;
+			children = (
+				1161252E1A2ED15C00980EE4 /* KillZombies */,
+				1161252D1A2ED15C00980EE4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1161252D1A2ED15C00980EE4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1161252C1A2ED15C00980EE4 /* KillZombies.app */,
+				1161253F1A2ED15C00980EE4 /* KillZombiesTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1161252E1A2ED15C00980EE4 /* KillZombies */ = {
+			isa = PBXGroup;
+			children = (
+				116125311A2ED15C00980EE4 /* AppDelegate.h */,
+				116125321A2ED15C00980EE4 /* AppDelegate.m */,
+				116125361A2ED15C00980EE4 /* Images.xcassets */,
+				116125381A2ED15C00980EE4 /* MainMenu.xib */,
+				1161252F1A2ED15C00980EE4 /* Supporting Files */,
+			);
+			path = KillZombies;
+			sourceTree = "<group>";
+		};
+		1161252F1A2ED15C00980EE4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				116125301A2ED15C00980EE4 /* Info.plist */,
+				116125341A2ED15C00980EE4 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1161252B1A2ED15C00980EE4 /* KillZombies */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 116125491A2ED15C00980EE4 /* Build configuration list for PBXNativeTarget "KillZombies" */;
+			buildPhases = (
+				116125281A2ED15C00980EE4 /* Sources */,
+				116125291A2ED15C00980EE4 /* Frameworks */,
+				1161252A1A2ED15C00980EE4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KillZombies;
+			productName = KillZombies;
+			productReference = 1161252C1A2ED15C00980EE4 /* KillZombies.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1161253E1A2ED15C00980EE4 /* KillZombiesTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1161254C1A2ED15C00980EE4 /* Build configuration list for PBXNativeTarget "KillZombiesTests" */;
+			buildPhases = (
+				1161253B1A2ED15C00980EE4 /* Sources */,
+				1161253C1A2ED15C00980EE4 /* Frameworks */,
+				1161253D1A2ED15C00980EE4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				116125411A2ED15C00980EE4 /* PBXTargetDependency */,
+			);
+			name = KillZombiesTests;
+			productName = KillZombiesTests;
+			productReference = 1161253F1A2ED15C00980EE4 /* KillZombiesTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		116125241A2ED15C00980EE4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = revin;
+				TargetAttributes = {
+					1161252B1A2ED15C00980EE4 = {
+						CreatedOnToolsVersion = 6.1;
+					};
+					1161253E1A2ED15C00980EE4 = {
+						CreatedOnToolsVersion = 6.1;
+						TestTargetID = 1161252B1A2ED15C00980EE4;
+					};
+				};
+			};
+			buildConfigurationList = 116125271A2ED15C00980EE4 /* Build configuration list for PBXProject "KillZombies" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 116125231A2ED15C00980EE4;
+			productRefGroup = 1161252D1A2ED15C00980EE4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1161252B1A2ED15C00980EE4 /* KillZombies */,
+				1161253E1A2ED15C00980EE4 /* KillZombiesTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1161252A1A2ED15C00980EE4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				116125371A2ED15C00980EE4 /* Images.xcassets in Resources */,
+				1161253A1A2ED15C00980EE4 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1161253D1A2ED15C00980EE4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		116125281A2ED15C00980EE4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				116125351A2ED15C00980EE4 /* main.m in Sources */,
+				116125331A2ED15C00980EE4 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1161253B1A2ED15C00980EE4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		116125411A2ED15C00980EE4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1161252B1A2ED15C00980EE4 /* KillZombies */;
+			targetProxy = 116125401A2ED15C00980EE4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		116125381A2ED15C00980EE4 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				116125391A2ED15C00980EE4 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		116125471A2ED15C00980EE4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		116125481A2ED15C00980EE4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		1161254A1A2ED15C00980EE4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = KillZombies/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		1161254B1A2ED15C00980EE4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = KillZombies/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		1161254D1A2ED15C00980EE4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = KillZombiesTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KillZombies.app/Contents/MacOS/KillZombies";
+			};
+			name = Debug;
+		};
+		1161254E1A2ED15C00980EE4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = KillZombiesTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KillZombies.app/Contents/MacOS/KillZombies";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		116125271A2ED15C00980EE4 /* Build configuration list for PBXProject "KillZombies" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				116125471A2ED15C00980EE4 /* Debug */,
+				116125481A2ED15C00980EE4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		116125491A2ED15C00980EE4 /* Build configuration list for PBXNativeTarget "KillZombies" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1161254A1A2ED15C00980EE4 /* Debug */,
+				1161254B1A2ED15C00980EE4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1161254C1A2ED15C00980EE4 /* Build configuration list for PBXNativeTarget "KillZombiesTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1161254D1A2ED15C00980EE4 /* Debug */,
+				1161254E1A2ED15C00980EE4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 116125241A2ED15C00980EE4 /* Project object */;
+}
