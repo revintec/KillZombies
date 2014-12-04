@@ -36,6 +36,7 @@
     self.dict=[NSMutableDictionary dictionary];
     [self.dict setObject:self forKey:@"Xcode"];
     [self.dict setObject:self forKey:@"TextEdit"];
+    [self.dict setObject:self forKey:@"Automator"];
     [self.dict setObject:self forKey:@"Script Editor"];
     [self.dict setObject:self forKey:@"Sublime Text"];
     
