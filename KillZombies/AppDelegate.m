@@ -19,7 +19,7 @@
     NSDictionary*_n=[notification userInfo];if(_n==nil)return;
     NSRunningApplication*ra=[_n objectForKey:NSWorkspaceApplicationKey];if(ra==nil)return;
     NSString*name=[ra localizedName];
-    if(![self.dict objectForKey:name])return;
+    if(!self.dict[name])return;
     AXUIElementRef xa=AXUIElementCreateApplication([ra processIdentifier]);
     // BUG FIX: don't use AXUIElementCopyAttributeValue(xa,kAXWindowsAttribute,&windows)
     // because it won't get windows on other desktop, so will terminate apps by mistake!
@@ -34,24 +34,24 @@
 }
 -(void)applicationWillBecomeActive:(NSNotification*)notification{
     self.dict=[NSMutableDictionary dictionary];
-    [self.dict setObject:self forKey:@"Xcode"];
-    [self.dict setObject:self forKey:@"TextEdit"];
-    [self.dict setObject:self forKey:@"Automator"];
-    [self.dict setObject:self forKey:@"Script Editor"];
-    [self.dict setObject:self forKey:@"Sublime Text"];
+    id opt=(id)kCFBooleanTrue;
+    self.dict[@"Xcode"]=opt;
+    self.dict[@"TextEdit"]=opt;
+    self.dict[@"Automator"]=opt;
+    self.dict[@"Script Editor"]=opt;
+    self.dict[@"Sublime Text"]=opt;
     
-    [self.dict setObject:self forKey:@"Terminal"];
-    [self.dict setObject:self forKey:@"Activity Monitor"];
-    [self.dict setObject:self forKey:@"QuickTime Player"];
-    [self.dict setObject:self forKey:@"MPlayer OSX Extended"];
+    self.dict[@"Terminal"]=opt;
+    self.dict[@"Activity Monitor"]=opt;
+    self.dict[@"QuickTime Player"]=opt;
+    self.dict[@"MPlayer OSX Extended"]=opt;
     
-    [self.dict setObject:self forKey:@"Preview"];
-    [self.dict setObject:self forKey:@"Pages"];
-    [self.dict setObject:self forKey:@"Numbers"];
-    [self.dict setObject:self forKey:@"Keynote"];
+    self.dict[@"Preview"]=opt;
+    self.dict[@"Pages"]=opt;
+    self.dict[@"Numbers"]=opt;
+    self.dict[@"Keynote"]=opt;
     
-    [self.dict setObject:self forKey:@"VMware Fusion"];
-    
+    self.dict[@"VMware Fusion"]=opt;
     ProcessSerialNumber psn={0,kCurrentProcess};
     TransformProcessType(&psn,kProcessTransformToForegroundApplication);
 }
