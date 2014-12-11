@@ -39,6 +39,8 @@
     self.dict=[NSMutableDictionary dictionary];
     id opt=(id)kCFBooleanTrue;
     self.dict[@"Xcode"]=opt;
+    self.dict[@"Kaleidoscope"]=opt;
+    self.dict[@"GitHub"]=opt;
     self.dict[@"TextEdit"]=opt;
     self.dict[@"Automator"]=opt;
     self.dict[@"Script Editor"]=opt;
