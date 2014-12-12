@@ -12,6 +12,7 @@
 
 @property (weak) IBOutlet NSWindow *window;
 @property NSMutableDictionary*dict;
+@property bool snagitRunning;
 @end
 
 @implementation AppDelegate
@@ -19,6 +20,7 @@
     NSDictionary*_n=[notification userInfo];if(_n==nil)return;
     NSRunningApplication*ra=[_n objectForKey:NSWorkspaceApplicationKey];if(ra==nil)return;
     NSString*name=[ra localizedName];
+    if(self.snagitRunning&&[@"SnagitHelper" isEqual:name])self.snagitRunning=false;
     if(!self.dict[name])return;
     AXUIElementRef xa=AXUIElementCreateApplication([ra processIdentifier]);
     AXError error;CFTypeRef dontCare;
@@ -32,6 +34,13 @@
     error=AXUIElementCopyAttributeValue(xa,kAXExtrasMenuBarAttribute,&dontCare);
     if(!error)return;else if(kAXErrorNoValue!=error){AudioServicesPlayAlertSound(kSystemSoundID_UserPreferredAlert);return;}
     [ra terminate];
+}
+-(void)someotherAppGotActivated:(NSNotification*)notification{
+    NSDictionary*_n=[notification userInfo];if(_n==nil)return;
+    NSRunningApplication*ra=[_n objectForKey:NSWorkspaceApplicationKey];if(ra==nil)return;
+    NSString*name=[ra localizedName];
+    if([@"SnagitHelper" isEqual:name])
+        self.snagitRunning=true;
 }
 -(void)applicationWillBecomeActive:(NSNotification*)notification{
     self.dict=[NSMutableDictionary dictionary];
@@ -66,6 +75,7 @@
     ProcessSerialNumber psn={0,kCurrentProcess};
     TransformProcessType(&psn,kProcessTransformToUIElementApplication);
 }
+#define EXECPATH "/Applications/Snagit.app/Contents/MacOS/Snagit"
 -(void)applicationDidFinishLaunching:(NSNotification*)notification{
     if(!AXIsProcessTrusted()){
         [self.window close];
@@ -79,6 +89,14 @@
     }else{
         NSNotificationCenter*ncc=[[NSWorkspace sharedWorkspace]notificationCenter];
         [ncc addObserver:self selector:@selector(someotherAppGotDeactivated:) name:NSWorkspaceDidDeactivateApplicationNotification object:nil];
+        [ncc addObserver:self selector:@selector(someotherAppGotActivated:)   name:NSWorkspaceDidActivateApplicationNotification   object:nil];
+        [NSEvent addGlobalMonitorForEventsMatchingMask:NSFlagsChangedMask handler:^(NSEvent*ev){
+            if(self.snagitRunning){
+                if([ev modifierFlags]&NSAlternateKeyMask)
+                    system("chmod -x "EXECPATH);
+                else system("chmod +x "EXECPATH);
+            }
+        }];
     }
 }
 -(void)applicationWillTerminate:(NSNotification*)notification{
