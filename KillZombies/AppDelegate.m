@@ -21,8 +21,6 @@
     NSString*name=[ra localizedName];
     if(!self.dict[name])return;
     AXUIElementRef xa=AXUIElementCreateApplication([ra processIdentifier]);
-    // BUG FIX: don't use AXUIElementCopyAttributeValue(xa,kAXWindowsAttribute,&windows)
-    // because it won't get windows on other desktop, so will terminate apps by mistake!
     AXError error;CFTypeRef dontCare;
     error=AXUIElementCopyAttributeValue(xa,kAXWindowsAttribute,&dontCare);
     if(error){AudioServicesPlayAlertSound(kSystemSoundID_UserPreferredAlert);return;}
