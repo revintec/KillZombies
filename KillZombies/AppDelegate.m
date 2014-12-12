@@ -12,15 +12,26 @@
 
 @property (weak) IBOutlet NSWindow *window;
 @property NSMutableDictionary*dict;
-@property bool snagitRunning;
+@property bool snagitRunning,snagitMod;
 @end
 
 @implementation AppDelegate
+#define EXECPATH "/Applications/Snagit.app/Contents/MacOS/Snagit"
+static inline void toggleSnagitEditorState(bool x){
+    if(x)system("chmod +x "EXECPATH);
+    else system("chmod -x "EXECPATH);
+}
 -(void)someotherAppGotDeactivated:(NSNotification*)notification{
     NSDictionary*_n=[notification userInfo];if(_n==nil)return;
     NSRunningApplication*ra=[_n objectForKey:NSWorkspaceApplicationKey];if(ra==nil)return;
     NSString*name=[ra localizedName];
-    if(self.snagitRunning&&[@"SnagitHelper" isEqual:name])self.snagitRunning=false;
+    if(self.snagitRunning&&[@"SnagitHelper" isEqual:name]){
+        self.snagitRunning=false;
+        if(self.snagitMod){
+            self.snagitMod=false;
+            toggleSnagitEditorState(true);
+        }return;
+    }
     if(!self.dict[name])return;
     AXUIElementRef xa=AXUIElementCreateApplication([ra processIdentifier]);
     AXError error;CFTypeRef dontCare;
@@ -75,7 +86,6 @@
     ProcessSerialNumber psn={0,kCurrentProcess};
     TransformProcessType(&psn,kProcessTransformToUIElementApplication);
 }
-#define EXECPATH "/Applications/Snagit.app/Contents/MacOS/Snagit"
 -(void)applicationDidFinishLaunching:(NSNotification*)notification{
     if(!AXIsProcessTrusted()){
         [self.window close];
@@ -91,11 +101,7 @@
         [ncc addObserver:self selector:@selector(someotherAppGotDeactivated:) name:NSWorkspaceDidDeactivateApplicationNotification object:nil];
         [ncc addObserver:self selector:@selector(someotherAppGotActivated:)   name:NSWorkspaceDidActivateApplicationNotification   object:nil];
         [NSEvent addGlobalMonitorForEventsMatchingMask:NSFlagsChangedMask handler:^(NSEvent*ev){
-            if(self.snagitRunning){
-                if([ev modifierFlags]&NSAlternateKeyMask)
-                    system("chmod -x "EXECPATH);
-                else system("chmod +x "EXECPATH);
-            }
+            if(self.snagitRunning)toggleSnagitEditorState(!(self.snagitMod=[ev modifierFlags]&NSAlternateKeyMask));
         }];
     }
 }
