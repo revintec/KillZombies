@@ -68,6 +68,7 @@ static inline void toggleSnagitEditorState(bool x){
     self.dict[@"Activity Monitor"]=opt;
     self.dict[@"QuickTime Player"]=opt;
     self.dict[@"MPlayer OSX Extended"]=opt;
+    self.dict[@"VLC"]=opt;
     
     self.dict[@"Preview"]=opt;
     self.dict[@"Pages"]=opt;
