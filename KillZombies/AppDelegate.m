@@ -25,7 +25,7 @@ static inline void toggleSnagitEditorState(bool x){
     NSDictionary*_n=[notification userInfo];if(_n==nil)return;
     NSRunningApplication*ra=[_n objectForKey:NSWorkspaceApplicationKey];if(ra==nil)return;
     NSString*name=[ra localizedName];
-#define bailout(msg) {NSLog(@"%s: %@",msg,name);AudioServicesPlayAlertSound(kSystemSoundID_UserPreferredAlert);return;}
+#define bailout(msg) {NSLog(@"%s(%d): %@",msg,error,name);AudioServicesPlayAlertSound(kSystemSoundID_UserPreferredAlert);return;}
     if(self.snagitRunning&&[@"SnagitHelper" isEqual:name]){
         self.snagitRunning=false;
         if(self.snagitMod){
