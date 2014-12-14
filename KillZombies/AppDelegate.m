@@ -25,6 +25,7 @@ static inline void toggleSnagitEditorState(bool x){
     NSDictionary*_n=[notification userInfo];if(_n==nil)return;
     NSRunningApplication*ra=[_n objectForKey:NSWorkspaceApplicationKey];if(ra==nil)return;
     NSString*name=[ra localizedName];
+#define bailout(msg) {NSLog(@"%s: %@",msg,name);AudioServicesPlayAlertSound(kSystemSoundID_UserPreferredAlert);return;}
     if(self.snagitRunning&&[@"SnagitHelper" isEqual:name]){
         self.snagitRunning=false;
         if(self.snagitMod){
@@ -36,14 +37,14 @@ static inline void toggleSnagitEditorState(bool x){
     AXUIElementRef xa=AXUIElementCreateApplication([ra processIdentifier]);
     AXError error;CFTypeRef dontCare;
     error=AXUIElementCopyAttributeValue(xa,kAXWindowsAttribute,&dontCare);
-    if(error){AudioServicesPlayAlertSound(kSystemSoundID_UserPreferredAlert);return;}
+    if(error)bailout("get kAXWindowsAttribute");
     if([(__bridge NSArray*)dontCare count])return;
     error=AXUIElementCopyAttributeValue(xa,kAXMainWindowAttribute,&dontCare);
-    if(!error)return;else if(kAXErrorNoValue!=error){AudioServicesPlayAlertSound(kSystemSoundID_UserPreferredAlert);return;}
+    if(!error)return;else if(kAXErrorNoValue!=error)bailout("get kAXMainWindowAttribute");
     error=AXUIElementCopyAttributeValue(xa,kAXFocusedWindowAttribute,&dontCare);
-    if(!error)return;else if(kAXErrorNoValue!=error){AudioServicesPlayAlertSound(kSystemSoundID_UserPreferredAlert);return;}
+    if(!error)return;else if(kAXErrorNoValue!=error)bailout("get kAXFocusedWindowAttribute");
     error=AXUIElementCopyAttributeValue(xa,kAXExtrasMenuBarAttribute,&dontCare);
-    if(!error)return;else if(kAXErrorNoValue!=error){AudioServicesPlayAlertSound(kSystemSoundID_UserPreferredAlert);return;}
+    if(!error)return;else if(kAXErrorNoValue!=error)bailout("get AXExtrasMenuBarAttribute");
     [ra terminate];
 }
 -(void)someotherAppGotActivated:(NSNotification*)notification{
