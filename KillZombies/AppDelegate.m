@@ -21,11 +21,11 @@ static inline void toggleSnagitEditorState(bool x){
     if(x)system("chmod +x "EXECPATH);
     else system("chmod -x "EXECPATH);
 }
+#define PRETTYLOG(fmt,...) NSLog([fmt stringByAppendingString:@"    at %s(line %d)"],##__VA_ARGS__,__PRETTY_FUNCTION__,__LINE__)
 -(void)someotherAppGotDeactivated:(NSNotification*)notification{
     NSDictionary*_n=[notification userInfo];if(_n==nil)return;
     NSRunningApplication*ra=[_n objectForKey:NSWorkspaceApplicationKey];if(ra==nil)return;
     NSString*name=[ra localizedName];
-#define bailout(msg) {NSLog(@"%s(%d): %@",msg,error,name);if(!supressWrns)AudioServicesPlayAlertSound(kSystemSoundID_UserPreferredAlert);return;}
     if(self.snagitRunning&&[@"SnagitHelper" isEqual:name]){
         self.snagitRunning=false;
         if(self.snagitMod){
@@ -34,9 +34,10 @@ static inline void toggleSnagitEditorState(bool x){
         }return;
     }
     if(!self.dict[name])return;
-    bool supressWrns=[@"VLC" isEqual:name];
+    bool suppressWrns=[@"VLC" isEqual:name];
     AXUIElementRef xa=AXUIElementCreateApplication([ra processIdentifier]);
     AXError error;CFTypeRef dontCare;
+    #define bailout(msg) {PRETTYLOG(@"%s(%@): %d",msg,name,error);if(!suppressWrns)AudioServicesPlayAlertSound(kSystemSoundID_UserPreferredAlert);return;}
     error=AXUIElementCopyAttributeValue(xa,kAXWindowsAttribute,&dontCare);
     if(error)bailout("get kAXWindowsAttribute");
     if([(__bridge NSArray*)dontCare count])return;
