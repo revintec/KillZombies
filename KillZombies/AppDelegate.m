@@ -60,6 +60,7 @@ static inline void toggleSnagitEditorState(bool x){
     self.dict=[NSMutableDictionary dictionary];
     id opt=(id)kCFBooleanTrue;
     self.dict[@"Xcode"]=opt;
+    self.dict[@"Console"]=opt;
     self.dict[@"Kaleidoscope"]=opt;
     self.dict[@"GitHub"]=opt;
     self.dict[@"TextEdit"]=opt;
@@ -77,7 +78,8 @@ static inline void toggleSnagitEditorState(bool x){
     self.dict[@"Pages"]=opt;
     self.dict[@"Numbers"]=opt;
     self.dict[@"Keynote"]=opt;
-    
+
+    self.dict[@"Keychain Access"]=opt;
     self.dict[@"VMware Fusion"]=opt;
     ProcessSerialNumber psn={0,kCurrentProcess};
     TransformProcessType(&psn,kProcessTransformToForegroundApplication);
