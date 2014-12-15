@@ -22,9 +22,8 @@ static inline void toggleSnagitEditorState(bool x){
     else system("chmod -x "EXECPATH);
 }
 #define PRETTYLOG(fmt,...) NSLog([fmt stringByAppendingString:@"    at %s(line %d)"],##__VA_ARGS__,__PRETTY_FUNCTION__,__LINE__)
--(void)someotherAppGotDeactivated:(NSNotification*)notification{
-    NSDictionary*_n=[notification userInfo];if(_n==nil)return;
-    NSRunningApplication*ra=[_n objectForKey:NSWorkspaceApplicationKey];if(ra==nil)return;
+-(void)delayedRAOperations:(NSRunningApplication*)ra{
+    if([ra isTerminated]||[ra isActive])return;
     NSString*name=[ra localizedName];
     if(self.snagitRunning&&[@"SnagitHelper" isEqual:name]){
         self.snagitRunning=false;
@@ -34,10 +33,9 @@ static inline void toggleSnagitEditorState(bool x){
         }return;
     }
     if(!self.dict[name])return;
-    bool suppressWrns=[@"VLC" isEqual:name];
     AXUIElementRef xa=AXUIElementCreateApplication([ra processIdentifier]);
     AXError error;CFTypeRef dontCare;
-    #define bailout(msg) {PRETTYLOG(@"%s(%@): %d",msg,name,error);if(!suppressWrns)AudioServicesPlayAlertSound(kSystemSoundID_UserPreferredAlert);return;}
+#define bailout(msg) {PRETTYLOG(@"%s(%@): %d",msg,name,error);AudioServicesPlayAlertSound(kSystemSoundID_UserPreferredAlert);return;}
     error=AXUIElementCopyAttributeValue(xa,kAXWindowsAttribute,&dontCare);
     if(error)bailout("get kAXWindowsAttribute");
     if([(__bridge NSArray*)dontCare count])return;
@@ -48,6 +46,11 @@ static inline void toggleSnagitEditorState(bool x){
     error=AXUIElementCopyAttributeValue(xa,kAXExtrasMenuBarAttribute,&dontCare);
     if(!error)return;else if(kAXErrorNoValue!=error)bailout("get AXExtrasMenuBarAttribute");
     [ra terminate];
+}
+-(void)someotherAppGotDeactivated:(NSNotification*)notification{
+    NSDictionary*_n=[notification userInfo];if(_n==nil)return;
+    NSRunningApplication*ra=[_n objectForKey:NSWorkspaceApplicationKey];
+    if(ra)[self performSelector:@selector(delayedRAOperations:) withObject:ra afterDelay:0.3];
 }
 -(void)someotherAppGotActivated:(NSNotification*)notification{
     NSDictionary*_n=[notification userInfo];if(_n==nil)return;
