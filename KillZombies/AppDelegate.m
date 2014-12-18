@@ -27,7 +27,6 @@ static inline void toggleSnagitEditorState(bool x){
     for(CFIndex i=CFArrayGetCount(children)-1;i>=0;--i){
         CFTypeRef t,child=CFArrayGetValueAtIndex(children,i);
         if(AXUIElementCopyAttributeValue(child,kAXTitleAttribute,&t))return nil;
-        NSLog(@"%@",t);
         if([title isEqual:(__bridge id)(t)])
             return child;
     }return nil;
