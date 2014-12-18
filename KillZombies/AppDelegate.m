@@ -22,6 +22,16 @@ static inline void toggleSnagitEditorState(bool x){
     else system("chmod -x "EXECPATH);
 }
 #define PRETTYLOG(fmt,...) NSLog([fmt stringByAppendingString:@"    at %s(line %d)"],##__VA_ARGS__,__PRETTY_FUNCTION__,__LINE__)
+-(CFTypeRef)filterItems:(CFTypeRef)parent title:(NSString*)title{
+    CFTypeRef children;if(AXUIElementCopyAttributeValue(parent,kAXChildrenAttribute,&children))return nil;
+    for(CFIndex i=CFArrayGetCount(children)-1;i>=0;--i){
+        CFTypeRef t,child=CFArrayGetValueAtIndex(children,i);
+        if(AXUIElementCopyAttributeValue(child,kAXTitleAttribute,&t))return nil;
+        NSLog(@"%@",t);
+        if([title isEqual:(__bridge id)(t)])
+            return child;
+    }return nil;
+}
 -(void)delayedRAOperations:(NSRunningApplication*)ra{
     if([ra isTerminated]||[ra isActive])return;
     NSString*name=[ra localizedName];
@@ -34,17 +44,20 @@ static inline void toggleSnagitEditorState(bool x){
     }
     if(!self.dict[name])return;
     AXUIElementRef xa=AXUIElementCreateApplication([ra processIdentifier]);
-    AXError error;CFTypeRef dontCare;
+    AXError error;
 #define bailout(msg) {PRETTYLOG(@"%s(%@): %d",msg,name,error);AudioServicesPlayAlertSound(kSystemSoundID_UserPreferredAlert);return;}
-    error=AXUIElementCopyAttributeValue(xa,kAXWindowsAttribute,&dontCare);
-    if(error)bailout("get kAXWindowsAttribute");
-    if([(__bridge NSArray*)dontCare count])return;
-    error=AXUIElementCopyAttributeValue(xa,kAXMainWindowAttribute,&dontCare);
-    if(!error)return;else if(kAXErrorNoValue!=error)bailout("get kAXMainWindowAttribute");
-    error=AXUIElementCopyAttributeValue(xa,kAXFocusedWindowAttribute,&dontCare);
-    if(!error)return;else if(kAXErrorNoValue!=error)bailout("get kAXFocusedWindowAttribute");
-    error=AXUIElementCopyAttributeValue(xa,kAXExtrasMenuBarAttribute,&dontCare);
-    if(!error)return;else if(kAXErrorNoValue!=error)bailout("get AXExtrasMenuBarAttribute");
+#define bailout2(msg) {PRETTYLOG(@"%s(%@): got nil",msg,name);AudioServicesPlayAlertSound(kSystemSoundID_UserPreferredAlert);return;}
+    CFTypeRef menus;if((error=AXUIElementCopyAttributeValue(xa,kAXMenuBarAttribute,&menus)))bailout("get kAXMenuBarAttribute");
+    CFTypeRef menux;if(!(menux=[self filterItems:menus title:@"Window"]))bailout2("get Window(Menu)");
+    CFTypeRef itemx;if((error=AXUIElementCopyAttributeValue(menux,kAXChildrenAttribute,&itemx)))bailout("get menu content");
+    if(CFArrayGetCount(itemx)!=1)bailout("check menu content");
+    CFTypeRef item;if(!(item=[self filterItems:CFArrayGetValueAtIndex(itemx,0) title:@"Bring All to Front"]))bailout2("get Bring All to Front(Menu)");
+    CFTypeRef enabled;if((error=AXUIElementCopyAttributeValue(item,kAXEnabledAttribute,&enabled)))bailout("is menu item enabled");
+    if(enabled!=kCFBooleanFalse)return;
+    CFTypeRef dontCare;
+    if(!(error=AXUIElementCopyAttributeValue(xa,kAXExtrasMenuBarAttribute,&dontCare)))
+        return;
+    else if(kAXErrorNoValue!=error)bailout("get AXExtrasMenuBarAttribute");
     [ra terminate];
 }
 -(void)someotherAppGotDeactivated:(NSNotification*)notification{
