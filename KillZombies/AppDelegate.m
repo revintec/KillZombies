@@ -54,9 +54,11 @@ static inline void toggleSnagitEditorState(bool x){
     CFTypeRef item;if(!(item=[self filterItems:CFArrayGetValueAtIndex(itemx,0) title:@"Bring All to Front"]))bailout2("get Bring All to Front(Menu)");
     CFTypeRef enabled;if((error=AXUIElementCopyAttributeValue(item,kAXEnabledAttribute,&enabled)))bailout("is menu item enabled");
     if(enabled!=kCFBooleanFalse)return;
-    CFTypeRef dontCare;
-    if(!(error=AXUIElementCopyAttributeValue(xa,kAXExtrasMenuBarAttribute,&dontCare)))
-        return;
+    CFTypeRef windows,extras;
+    if(!(error=AXUIElementCopyAttributeValue(xa,kAXWindowsAttribute,&windows))){
+        if(CFArrayGetCount(windows))return;
+    }else bailout("get kAXWindowsAttribute");
+    if(!(error=AXUIElementCopyAttributeValue(xa,kAXExtrasMenuBarAttribute,&extras)))return;
     else if(kAXErrorNoValue!=error)bailout("get AXExtrasMenuBarAttribute");
     [ra terminate];
 }
