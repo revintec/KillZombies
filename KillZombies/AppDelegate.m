@@ -70,7 +70,7 @@ static inline void toggleSnagitEditorState(bool x){
 -(void)someotherAppGotDeactivated:(NSNotification*)notification{
     NSDictionary*_n=[notification userInfo];if(!_n)return;
     NSRunningApplication*ra=[_n objectForKey:NSWorkspaceApplicationKey];if(!ra)return;
-    [self performSelector:@selector(delayedRAOperations:) withObject:ra afterDelay:1.8];
+    [self performSelector:@selector(delayedRAOperations:) withObject:ra afterDelay:0.8];
 }
 -(void)someotherAppGotActivated:(NSNotification*)notification{
     NSDictionary*_n=[notification userInfo];if(!_n)return;
