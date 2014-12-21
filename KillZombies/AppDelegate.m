@@ -32,7 +32,13 @@ static inline void toggleSnagitEditorState(bool x){
     }return nil;
 }
 -(void)delayedRAOperations:(NSRunningApplication*)ra{
-    if([ra isTerminated]||[ra isActive])return;
+    if([ra isTerminated])return;
+    if([ra isActive]){
+        NSString*name=[ra localizedName];
+        PRETTYLOG(@"%s(%@): ERROR","unexcepted execution branch",name);
+        AudioServicesPlayAlertSound(kSystemSoundID_UserPreferredAlert);
+        return;
+    }
     NSString*name=[ra localizedName];
     if(self.snagitRunning&&[@"SnagitHelper" isEqual:name]){
         self.snagitRunning=false;
@@ -62,18 +68,21 @@ static inline void toggleSnagitEditorState(bool x){
     [ra terminate];
 }
 -(void)someotherAppGotDeactivated:(NSNotification*)notification{
-    NSDictionary*_n=[notification userInfo];if(_n==nil)return;
-    NSRunningApplication*ra=[_n objectForKey:NSWorkspaceApplicationKey];
-    if(ra)[self performSelector:@selector(delayedRAOperations:) withObject:ra afterDelay:0.3];
+    NSDictionary*_n=[notification userInfo];if(!_n)return;
+    NSRunningApplication*ra=[_n objectForKey:NSWorkspaceApplicationKey];if(!ra)return;
+    [self performSelector:@selector(delayedRAOperations:) withObject:ra afterDelay:1.8];
 }
 -(void)someotherAppGotActivated:(NSNotification*)notification{
-    NSDictionary*_n=[notification userInfo];if(_n==nil)return;
-    NSRunningApplication*ra=[_n objectForKey:NSWorkspaceApplicationKey];if(ra==nil)return;
+    NSDictionary*_n=[notification userInfo];if(!_n)return;
+    NSRunningApplication*ra=[_n objectForKey:NSWorkspaceApplicationKey];if(!ra)return;
     NSString*name=[ra localizedName];
     if([@"SnagitHelper" isEqual:name])
         self.snagitRunning=true;
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(delayedRAOperations:) object:ra];
 }
+// update configuration inside this file
 -(void)applicationWillBecomeActive:(NSNotification*)notification{
+    // TODO read configuration from file instead of hard-coded
     self.dict=[NSMutableDictionary dictionary];
     id opt=(id)kCFBooleanTrue;
     self.dict[@"Xcode"]=opt;
@@ -98,6 +107,7 @@ static inline void toggleSnagitEditorState(bool x){
 
     self.dict[@"Keychain Access"]=opt;
     self.dict[@"VMware Fusion"]=opt;
+    self.dict[@"Transmit"]=opt;
     ProcessSerialNumber psn={0,kCurrentProcess};
     TransformProcessType(&psn,kProcessTransformToForegroundApplication);
 }
