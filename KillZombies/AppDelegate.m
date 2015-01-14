@@ -64,7 +64,7 @@ static inline void toggleSnagitEditorState(bool x){
         if(CFArrayGetCount(windows))return;
     }else bailout("get kAXWindowsAttribute");
     if(!(error=AXUIElementCopyAttributeValue(xa,kAXExtrasMenuBarAttribute,&extras)))return;
-    else if(kAXErrorNoValue!=error)bailout("get AXExtrasMenuBarAttribute");
+    else if(kAXErrorNoValue!=error&&kAXErrorAttributeUnsupported!=error)bailout("get AXExtrasMenuBarAttribute");
     [ra terminate];
 }
 -(void)someotherAppGotDeactivated:(NSNotification*)notification{
