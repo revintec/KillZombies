@@ -93,6 +93,8 @@ static inline void toggleSnagitEditorState(bool x){
     self.dict[@"Automator"]=opt;
     self.dict[@"Script Editor"]=opt;
     self.dict[@"Sublime Text"]=opt;
+    self.dict[@"TextWrangler"]=opt;
+    self.dict[@"Synalyze It! Pro"]=opt;
     
     self.dict[@"Terminal"]=opt;
     self.dict[@"Activity Monitor"]=opt;
