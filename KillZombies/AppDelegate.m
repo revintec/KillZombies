@@ -88,13 +88,14 @@ static inline void toggleSnagitEditorState(bool x){
     self.dict[@"Xcode"]=opt;
     self.dict[@"Console"]=opt;
     self.dict[@"Kaleidoscope"]=opt;
-    self.dict[@"GitHub"]=opt;
+    self.dict[@"SourceTree"]=opt;
     self.dict[@"TextEdit"]=opt;
     self.dict[@"Automator"]=opt;
     self.dict[@"Script Editor"]=opt;
     self.dict[@"Sublime Text"]=opt;
     self.dict[@"TextWrangler"]=opt;
     self.dict[@"Synalyze It! Pro"]=opt;
+    self.dict[@"Hopper Disassembler v3"]=opt;
     
     self.dict[@"Terminal"]=opt;
     self.dict[@"Activity Monitor"]=opt;
