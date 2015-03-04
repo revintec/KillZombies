@@ -45,25 +45,25 @@ static inline void toggleSnagitEditorState(bool x){
 #define bailout(msg) {PRETTYLOG(@"%s(%@): %d",msg,name,error);AudioServicesPlayAlertSound(kSystemSoundID_UserPreferredAlert);return;}
 #define bailout2(msg) {PRETTYLOG(@"%s(%@): got nil",msg,name);AudioServicesPlayAlertSound(kSystemSoundID_UserPreferredAlert);return;}
     CFTypeRef menus;if((error=AXUIElementCopyAttributeValue(xa,kAXMenuBarAttribute,&menus)))bailout("get kAXMenuBarAttribute");
-    if([name isEqual:@"Microsoft Word"]||
-       [name isEqual:@"Microsoft Excel"]||
-       [name isEqual:@"Microsoft PowerPoint"]){
-        // special treatment
-        // since these Microsoft apps've been poorly written against Accessibility Protocol:
-        // some leaves items in kAXWindowsAttribute when all visible windows are closed,
-        // some leaves Window->Bring All to Front enabled when all visible windows are closed...
-        CFTypeRef menux;if(!(menux=[self filterItems:menus title:@"窗口"]))bailout2("get 窗口(Menu)");
-        CFTypeRef itemx;if((error=AXUIElementCopyAttributeValue(menux,kAXChildrenAttribute,&itemx)))bailout("get menu content");
-        if(CFArrayGetCount(itemx)!=1)bailout("check menu content");
-        CFTypeRef item;if(!(item=[self filterItems:CFArrayGetValueAtIndex(itemx,0) title:@"前置全部窗口"]))bailout2("get 前置全部窗口(Menu)");
-        CFTypeRef enabled;if((error=AXUIElementCopyAttributeValue(item,kAXEnabledAttribute,&enabled)))bailout("is menu item enabled");
-        if(enabled!=kCFBooleanFalse){
-            CFTypeRef windows;
-            if(!(error=AXUIElementCopyAttributeValue(xa,kAXWindowsAttribute,&windows))){
-                if(CFArrayGetCount(windows))return;
-            }else bailout("get kAXWindowsAttribute");
-        }[ra terminate];
-    }else{
+//    if([name isEqual:@"Microsoft Word"]||
+//       [name isEqual:@"Microsoft Excel"]||
+//       [name isEqual:@"Microsoft PowerPoint"]){
+//        // special treatment
+//        // since these Microsoft apps've been poorly written against Accessibility Protocol:
+//        // some leaves items in kAXWindowsAttribute when all visible windows are closed,
+//        // some leaves Window->Bring All to Front enabled when all visible windows are closed...
+//        CFTypeRef menux;if(!(menux=[self filterItems:menus title:@"窗口"]))bailout2("get 窗口(Menu)");
+//        CFTypeRef itemx;if((error=AXUIElementCopyAttributeValue(menux,kAXChildrenAttribute,&itemx)))bailout("get menu content");
+//        if(CFArrayGetCount(itemx)!=1)bailout("check menu content");
+//        CFTypeRef item;if(!(item=[self filterItems:CFArrayGetValueAtIndex(itemx,0) title:@"前置全部窗口"]))bailout2("get 前置全部窗口(Menu)");
+//        CFTypeRef enabled;if((error=AXUIElementCopyAttributeValue(item,kAXEnabledAttribute,&enabled)))bailout("is menu item enabled");
+//        if(enabled!=kCFBooleanFalse){
+//            CFTypeRef windows;
+//            if(!(error=AXUIElementCopyAttributeValue(xa,kAXWindowsAttribute,&windows))){
+//                if(CFArrayGetCount(windows))return;
+//            }else bailout("get kAXWindowsAttribute");
+//        }[ra terminate];
+//    }else{
         CFTypeRef menux;if(!(menux=[self filterItems:menus title:@"Window"]))bailout2("get Window(Menu)");
         CFTypeRef itemx;if((error=AXUIElementCopyAttributeValue(menux,kAXChildrenAttribute,&itemx)))bailout("get menu content");
         if(CFArrayGetCount(itemx)!=1)bailout("check menu content");
@@ -77,7 +77,7 @@ static inline void toggleSnagitEditorState(bool x){
         if(!(error=AXUIElementCopyAttributeValue(xa,kAXExtrasMenuBarAttribute,&extras)))return;
         else if(kAXErrorNoValue!=error&&kAXErrorAttributeUnsupported!=error)bailout("get AXExtrasMenuBarAttribute");
         [ra terminate];
-    }
+//    }
 }
 -(void)someotherAppGotDeactivated:(NSNotification*)notification{
     NSDictionary*_n=[notification userInfo];if(!_n)return;
@@ -127,9 +127,9 @@ static inline void toggleSnagitEditorState(bool x){
     self.dict[@"Numbers"]=opt;
     self.dict[@"Keynote"]=opt;
 
-    self.dict[@"Microsoft Word"]=opt;
-    self.dict[@"Microsoft Excel"]=opt;
-    self.dict[@"Microsoft PowerPoint"]=opt;
+//    self.dict[@"Microsoft Word"]=opt;
+//    self.dict[@"Microsoft Excel"]=opt;
+//    self.dict[@"Microsoft PowerPoint"]=opt;
 
     self.dict[@"Keychain Access"]=opt;
     self.dict[@"VMware Fusion"]=opt;
