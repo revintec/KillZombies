@@ -114,7 +114,9 @@ static inline void toggleSnagitEditorState(bool x){
     self.dict[@"Sublime Text"]=opt;
     self.dict[@"TextWrangler"]=opt;
     self.dict[@"Synalyze It! Pro"]=opt;
+    
     self.dict[@"Hopper Disassembler v3"]=opt;
+    self.dict[@"OmniGraffle 6"]=opt;
     
     self.dict[@"Terminal"]=opt;
     self.dict[@"Activity Monitor"]=opt;
